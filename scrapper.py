@@ -8,7 +8,7 @@ url = 'https://covid.saude.gov.br/'
 def get_data():
     # set up option to do not open the browser
     option = Options()
-    option.headless = False
+    option.headless = True
 
     # Openning the browser and loading page
     driver = webdriver.Firefox(options=option)
