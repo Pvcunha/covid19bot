@@ -50,5 +50,3 @@ def get_data():
 
     #return dict
     return text
-
-print(get_data())
