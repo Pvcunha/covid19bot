@@ -4,12 +4,11 @@ The goal is to extract data from the health ministry's page and post in my twitt
 
 # Prerequistes
 
-You'll need to have installed python v- 3.6.2
+You'll need to have installed python v- 3.6.9
 
 ## Libraries
-
-- Selenium w/geckodriver
-- Tweepy
+All the libraries used in this project can be find at the requirements file. and also can be installed with the follow command:
+- `pip install -r requirements.txt`
 
 # Project
 
