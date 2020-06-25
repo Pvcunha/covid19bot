@@ -11,11 +11,9 @@ def heavy_job():
     #bot = TwitterHandler()
     #bot.post(text)
 
-heavy_job()
-#def main():
-#    ticker = threading.Event()
-#    while not ticker.wait(WAIT_SECONDS):
-#        heavy_job()
-#
-#if __name__ == "__main__":
-#    main()
+def teste():
+    print("testando")
+
+ticker = threading.Event()
+while not ticker.wait(WAIT_SECONDS):
+    heavy_job()
