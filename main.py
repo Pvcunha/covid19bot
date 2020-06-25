@@ -7,8 +7,9 @@ WAIT_SECONDS = 180
 
 def heavy_job():    
     text = get_data()
-    bot = TwitterHandler()
-    bot.post(text)
+    print(text)
+    #bot = TwitterHandler()
+    #bot.post(text)
 
 heavy_job()
 #def main():

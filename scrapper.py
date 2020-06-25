@@ -1,4 +1,5 @@
 import time
+import os
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import string
@@ -7,11 +8,13 @@ url = 'https://covid.saude.gov.br/'
 
 def get_data():
     # set up option to do not open the browser
-    option = Options()
-    option.headless = True
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-    # Openning the browser and loading page
-    driver = webdriver.Firefox(options=option)
     driver.get(url)
     time.sleep(5)
 
