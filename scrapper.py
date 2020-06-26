@@ -6,8 +6,8 @@ import string
 
 url = 'https://covid.saude.gov.br/'
 
-def get_data():
-    # set up option to do not open the browser
+# set up option to do not open the browser
+def open_browser():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
@@ -16,6 +16,12 @@ def get_data():
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     driver.get(url)
+    return driver
+
+def get_data(driver):
+
+    driver = open_browser()
+
     time.sleep(5)
 
     # Findind the elements and scrapping data
@@ -30,8 +36,6 @@ def get_data():
             v[i] = 'Obitos novos'
 
     list_text = list_text + v
-
-    #print(list_text)
     
     # Organize the wanted data in a dict
     cases = {}
@@ -45,11 +49,10 @@ def get_data():
         (flag, key) = (True, item) if item == 'Casos novos' or item == 'Acumulado' or item == 'Óbitos acumulados' or item == 'Obitos novos' else (False, 'None')
 
 
-    #print(cases)    
+    #return cases    
 
     driver.quit()
 
     text = 'Atualização dos números do COVID-19 no Brasil.\nNovos casos: {}\nTotal de casos: {}\nNovas mortes: {}\nTotal de mortes: {}'.format(cases['Casos novos'], cases['Acumulado'], cases['Obitos novos'], cases['Óbitos acumulados'])
 
-    #return dict
     return text
