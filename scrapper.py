@@ -6,6 +6,7 @@ import string
 
 url = 'https://covid.saude.gov.br/'
 
+
 # set up option to do not open the browser
 def open_browser():
     chrome_options = webdriver.ChromeOptions()
@@ -16,13 +17,18 @@ def open_browser():
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     driver.get(url)
+    
+    #option = Options()
+    #option.headless = True
+#
+    #driver = webdriver.Firefox(options=option)
+    #driver.get(url)
+    
+    time.sleep(5)
     return driver
 
+
 def get_data(driver):
-
-    driver = open_browser()
-
-    time.sleep(5)
 
     # Findind the elements and scrapping data
     e = driver.find_element_by_xpath('/html/body/app-root/ion-app/ion-router-outlet/app-home/ion-content/painel-geral-component/div/card-totalizadores-component/div/div[2]')
@@ -49,10 +55,15 @@ def get_data(driver):
         (flag, key) = (True, item) if item == 'Casos novos' or item == 'Acumulado' or item == 'Óbitos acumulados' or item == 'Obitos novos' else (False, 'None')
 
 
-    #return cases    
-
     driver.quit()
 
-    text = 'Atualização dos números do COVID-19 no Brasil.\nNovos casos: {}\nTotal de casos: {}\nNovas mortes: {}\nTotal de mortes: {}'.format(cases['Casos novos'], cases['Acumulado'], cases['Obitos novos'], cases['Óbitos acumulados'])
+    return cases    
 
+
+def build_text():
+    driver = open_browser()
+    cases = get_data(driver)
+    
+    text = 'Atualização dos números do COVID-19 no Brasil.\nNovos casos: {}\nTotal de casos: {}\nNovas mortes: {}\nTotal de mortes: {}'.format(cases['Casos novos'], cases['Acumulado'], cases['Obitos novos'], cases['Óbitos acumulados'])
+    
     return text

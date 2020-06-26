@@ -1,12 +1,12 @@
 import time, threading
 from tweet import TwitterHandler
-from scrapper import get_data
+from scrapper import build_text
 
 WAIT_SECONDS = 180
 
 
 def heavy_job():    
-    text = get_data()
+    text = build_text()
     print(text)
     #bot = TwitterHandler()
     #bot.post(text)
