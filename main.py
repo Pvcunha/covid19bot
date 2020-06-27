@@ -1,5 +1,5 @@
 import time, threading
-from tweet import TwitterHandler
+#from tweet import TwitterHandler
 from scrapper import build_text
 
 WAIT_SECONDS = 180
