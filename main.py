@@ -1,9 +1,9 @@
 import time, threading
 import datetime
-#from tweet import TwitterHandler
+from tweet import TwitterHandler
 import scrapper
 
-WAIT_SECONDS = 10
+WAIT_SECONDS = 15
 
 
 class App():
@@ -21,10 +21,8 @@ class App():
             print('Houve atualizacao no site')
             self.posted = cases.copy()
             text = scrapper.build_text(cases)
-            print(text)
-            #bot = TwitterHandler()
-            #bot.post(text)
-            #print(text)
+            th = TwitterHandler()
+            th.post(text)
 
         else:
             print('Não houve alteração')
