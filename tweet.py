@@ -24,3 +24,4 @@ class TwitterHandler:
         print(f'Postado: {text}')
 
 bot = TwitterHandler()
+bot.post('testando')

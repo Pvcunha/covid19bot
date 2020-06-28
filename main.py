@@ -11,7 +11,7 @@ class App():
     def __init__(self):        
         self.posted = {}
         self.posted_time = datetime.date.today()
-
+        self.th = TwitterHandler()
 
     def heavy_job(self):    
         
@@ -21,8 +21,7 @@ class App():
             print('Houve atualizacao no site')
             self.posted = cases.copy()
             text = scrapper.build_text(cases)
-            th = TwitterHandler()
-            th.post(text)
+            self.th.post(text)
 
         else:
             print('Não houve alteração')
