@@ -1,9 +1,7 @@
 import os
 import time, datetime
-import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-import string
 
 url = 'https://covid.saude.gov.br/'
 
@@ -23,7 +21,7 @@ def open_browser():
     #driver = webdriver.Firefox(options=option)
     #driver.get(url)
     #time.sleep(5)
-    
+
     return driver
 
 
