@@ -1,19 +1,39 @@
 import time, threading
+import datetime
 #from tweet import TwitterHandler
-from scrapper import build_text
+import scrapper
 
-WAIT_SECONDS = 180
+WAIT_SECONDS = 10
 
 
-def heavy_job():    
-    text = build_text()
-    print(text)
-    #bot = TwitterHandler()
-    #bot.post(text)
+class App():
 
-def teste():
-    print("testando")
+    def __init__(self):        
+        self.posted = {}
+        self.posted_time = datetime.date.today()
 
-ticker = threading.Event()
-while not ticker.wait(WAIT_SECONDS):
-    heavy_job()
+
+    def heavy_job(self):    
+        
+        driver = scrapper.open_browser()
+        cases = scrapper.get_data(driver)
+        if(self.posted != cases):
+            print('Houve atualizacao no site')
+            self.posted = cases.copy()
+            text = scrapper.build_text(cases)
+            print(text)
+            #bot = TwitterHandler()
+            #bot.post(text)
+            #print(text)
+
+        else:
+            print('Não houve alteração')
+
+    def app(self):
+        ticker = threading.Event()
+        while not ticker.wait(WAIT_SECONDS):
+            self.heavy_job()
+
+
+bot = App()
+bot.app()

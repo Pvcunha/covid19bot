@@ -1,29 +1,28 @@
-import time
 import os
+import time, datetime
+import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import string
 
 url = 'https://covid.saude.gov.br/'
 
-
 # set up option to do not open the browser
 def open_browser():
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
-    driver.get(url)
-    
-    #option = Options()
-    #option.headless = True
+    #chrome_options = webdriver.ChromeOptions()
+    #chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    #chrome_options.add_argument("--headless")
+    #chrome_options.add_argument("--disable-dev-shm-usage")
+    #chrome_options.add_argument("--no-sandbox")
+    #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 #
-    #driver = webdriver.Firefox(options=option)
     #driver.get(url)
     
+    option = Options()
+    option.headless = True
+
+    driver = webdriver.Firefox(options=option)
+    driver.get(url)
     time.sleep(5)
     return driver
 
@@ -50,7 +49,7 @@ def get_data(driver):
     for item in reversed(list_text):
         #print(flag, key)
         if flag:
-            cases[key] = item
+            cases[key] = [item]
 
         (flag, key) = (True, item) if item == 'Casos novos' or item == 'Acumulado' or item == 'Óbitos acumulados' or item == 'Obitos novos' else (False, 'None')
 
@@ -60,10 +59,7 @@ def get_data(driver):
     return cases    
 
 
-def build_text():
-    driver = open_browser()
-    cases = get_data(driver)
-    
-    text = 'Atualização dos números do COVID-19 no Brasil.\nNovos casos: {}\nTotal de casos: {}\nNovas mortes: {}\nTotal de mortes: {}'.format(cases['Casos novos'], cases['Acumulado'], cases['Obitos novos'], cases['Óbitos acumulados'])
+def build_text(cases): 
+    text = 'Esta é uma atualização automática\nNúmeros diários do COVID-19 no Brasil.\nCasos novos das últimas 24h: {}\nAcumulado de casos: {}\nNovas mortes das últimas 24h: {}\nAcumulado de mortes: {}'.format(cases['Casos novos'][0], cases['Acumulado'][0], cases['Obitos novos'][0], cases['Óbitos acumulados'][0])
     
     return text
