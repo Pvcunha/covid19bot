@@ -23,5 +23,4 @@ class TwitterHandler:
         self.api.update_status(text)
         print(f'Postado: {text}')
 
-bot = TwitterHandler()
-bot.post('testando')
+        

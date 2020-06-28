@@ -58,6 +58,6 @@ def get_data(driver):
 
 
 def build_text(cases): 
-    text = 'Esta é uma atualização automática\nNúmeros diários do COVID-19 no Brasil.\nCasos novos das últimas 24h: {}\nAcumulado de casos: {}\nNovas mortes das últimas 24h: {}\nAcumulado de mortes: {}'.format(cases['Casos novos'][0], cases['Acumulado'][0], cases['Obitos novos'][0], cases['Óbitos acumulados'][0])
+    text = 'Esta é uma atualização automática\n\nNúmeros diários do COVID-19 no Brasil.\nCasos novos das últimas 24h: {}\nAcumulado de casos: {}\nNovas mortes das últimas 24h: {}\nAcumulado de mortes: {}\n\nFonte: covid.saude.gov.br'.format(cases['Casos novos'][0], cases['Acumulado'][0], cases['Obitos novos'][0], cases['Óbitos acumulados'][0])
     
     return text
