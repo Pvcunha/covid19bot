@@ -3,7 +3,7 @@ import datetime
 from tweet import TwitterHandler
 import scrapper
 
-WAIT_SECONDS = 5
+WAIT_SECONDS = 1500
 
 
 class App():
