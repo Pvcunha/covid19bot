@@ -3,7 +3,7 @@ import datetime
 from tweet import TwitterHandler
 import scrapper
 
-WAIT_SECONDS = 15
+WAIT_SECONDS = 1200
 
 
 class App():
@@ -17,6 +17,8 @@ class App():
         
         driver = scrapper.open_browser()
         cases = scrapper.get_data(driver)
+        print("O postado é:", self.posted )
+        print("Os casos são:", cases)
         if(self.posted != cases):
             print('Houve atualizacao no site')
             self.posted = cases.copy()
